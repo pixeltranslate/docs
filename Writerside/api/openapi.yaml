@@ -1,0 +1,652 @@
+---
+openapi: 3.0.3
+info:
+  title: backend API
+  version: 0.1.0
+paths:
+  /workspaces:
+    get:
+      tags:
+      - Workspace Resource
+      summary: Get workspaces by token
+      description: Get workspaces by token of the user
+      operationId: getWorkspacesBySecurityContext
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/WorkspaceMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
+    post:
+      tags:
+      - Workspace Resource
+      summary: Create workspace
+      description: Create a new workspace with the given name and description
+      operationId: createWorkspace
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceCreateRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Workspace"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
+  /workspaces/{id}:
+    get:
+      tags:
+      - Workspace Resource
+      summary: Get workspace by id
+      description: Get workspace by id
+      operationId: getWorkspaceById
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/UUID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceMinimalProjectsDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
+    delete:
+      tags:
+      - Workspace Resource
+      summary: Delete workspace
+      description: Delete workspace by id
+      operationId: deleteWorkspace
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/UUID"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
+    patch:
+      tags:
+      - Workspace Resource
+      summary: Update workspace
+      description: Update a workspace with chosen fields
+      operationId: updateWorkspace
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          $ref: "#/components/schemas/UUID"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorkspaceUpdateRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WorkspaceMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
+  /workspaces/{workspaceId}/projects:
+    get:
+      tags:
+      - Project Resource
+      summary: Get all projects in a workspace
+      description: Get all projects by workspace id
+      operationId: getAllProjects
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ProjectMinimalCollectionsDto"
+    post:
+      tags:
+      - Project Resource
+      summary: Create a project in a workspace
+      description: Create a project in a workspace
+      operationId: createProject
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectCreateRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Project"
+    parameters:
+    - name: workspaceId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/UUID"
+  /workspaces/{workspaceId}/projects/{projectId}:
+    delete:
+      tags:
+      - Project Resource
+      summary: Delete a project in a workspace
+      description: Delete a project in a workspace by workspace id
+      operationId: deleteProject
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectMinimalDto"
+    patch:
+      tags:
+      - Project Resource
+      summary: Update a project in a workspace
+      description: Create a project in a workspace by workspace id
+      operationId: updateProject
+      parameters:
+      - name: projectId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ProjectUpdateRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProjectMinimalDto"
+    parameters:
+    - name: workspaceId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/UUID"
+  /workspaces/{workspaceId}/projects/{projectId}/collections:
+    get:
+      tags:
+      - Collection Resource
+      summary: Get all collections in a project
+      description: Get all collections by project id
+      operationId: getAllCollections
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/CollectionMinimalDto"
+    post:
+      tags:
+      - Collection Resource
+      summary: Create a collection in a project
+      description: Create a collection by project id
+      operationId: createCollection
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionCreateRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+    parameters:
+    - name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: workspaceId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/UUID"
+  /workspaces/{workspaceId}/projects/{projectId}/collections/{collectionId}:
+    get:
+      tags:
+      - Collection Resource
+      summary: Get a collection in a project
+      description: Get a collection by project id and collection id
+      operationId: getCollection
+      parameters:
+      - name: collectionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+    delete:
+      tags:
+      - Collection Resource
+      summary: Delete a collection in a project
+      description: Delete a collection by project id
+      operationId: deleteCollection
+      parameters:
+      - name: collectionId
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionMinimalDto"
+    patch:
+      tags:
+      - Collection Resource
+      summary: Update a collection in a project
+      description: Update a collection by project id
+      operationId: updateCollection
+      parameters:
+      - name: collectionId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CollectionUpdateRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CollectionMinimalDto"
+    parameters:
+    - name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: workspaceId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/UUID"
+  /workspaces/{workspaceId}/projects/{projectId}/collections/{collectionId}/entries:
+    post:
+      tags:
+      - Entry Resource
+      summary: Commit entries into collection
+      description: Commit entries into collection
+      operationId: commitEntries
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#/components/schemas/CollectionCommitEntry"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Collection"
+    parameters:
+    - name: collectionId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: projectId
+      in: path
+      required: true
+      schema:
+        type: string
+    - name: workspaceId
+      in: path
+      required: true
+      schema:
+        $ref: "#/components/schemas/UUID"
+components:
+  schemas:
+    Collection:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+        entries:
+          type: array
+          items:
+            $ref: "#/components/schemas/CollectionEntry"
+    CollectionCommitEntry:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        translations:
+          type: object
+          additionalProperties:
+            type: string
+        delete:
+          type: boolean
+    CollectionCreateRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          pattern: \S
+          type: string
+    CollectionEntry:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          pattern: \S
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+        translations:
+          type: object
+          additionalProperties:
+            type: string
+    CollectionMinimalDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+    CollectionUpdateRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          pattern: \S
+          type: string
+    Project:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        createdAt:
+          format: int64
+          type: integer
+        deletionAt:
+          format: int64
+          type: integer
+        collections:
+          type: array
+          items:
+            $ref: "#/components/schemas/Collection"
+    ProjectCreateRequest:
+      required:
+      - name
+      - platform
+      - languages
+      type: object
+      properties:
+        name:
+          pattern: \S
+          type: string
+        description:
+          type: string
+        platform:
+          pattern: \S
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+    ProjectMinimalCollectionsDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        createdAt:
+          format: int64
+          type: integer
+        collections:
+          type: array
+          items:
+            $ref: "#/components/schemas/CollectionMinimalDto"
+    ProjectMinimalDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+        createdAt:
+          format: int64
+          type: integer
+    ProjectUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        platform:
+          type: string
+        languages:
+          type: array
+          items:
+            type: string
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
+    Workspace:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/UUID"
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+        deletionAt:
+          format: int64
+          type: integer
+        members:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkspaceMember"
+        projects:
+          type: array
+          items:
+            $ref: "#/components/schemas/Project"
+    WorkspaceCreateRequest:
+      required:
+      - name
+      type: object
+      properties:
+        name:
+          pattern: \S
+          type: string
+        description:
+          type: string
+    WorkspaceMember:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/UUID"
+        userId:
+          $ref: "#/components/schemas/UUID"
+        role:
+          $ref: "#/components/schemas/WorkspaceRole"
+        joined:
+          format: int64
+          type: integer
+    WorkspaceMinimalDto:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/UUID"
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+        members:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkspaceMember"
+    WorkspaceMinimalProjectsDto:
+      type: object
+      properties:
+        id:
+          $ref: "#/components/schemas/UUID"
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          format: int64
+          type: integer
+        members:
+          type: array
+          items:
+            $ref: "#/components/schemas/WorkspaceMember"
+        projects:
+          type: array
+          items:
+            $ref: "#/components/schemas/ProjectMinimalDto"
+    WorkspaceRole:
+      enum:
+      - OWNER
+      - ADMIN
+      - TRUSTED
+      - MEMBER
+      type: string
+    WorkspaceUpdateRequest:
+      type: object
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+  securitySchemes:
+    SecurityScheme:
+      type: openIdConnect
+      description: Authentication
+      openIdConnectUrl: https://auth.averix.tech/4adaa11b-9e84-44d0-8cb9-34381dd48fe4/.well-known/openid-configuration
