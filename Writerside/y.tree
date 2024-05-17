@@ -8,20 +8,20 @@
 
     <toc-element topic="overview.md"/>
     <toc-element topic="API_Reference.md">
-        <toc-element toc-title="Workspace">
+        <toc-element topic="Workspace.md">
             <toc-element topic="Get_workspaces_by_token.md"/>
             <toc-element topic="Get_workspace_by_id.md"/>
             <toc-element topic="Create_workspace.md"/>
             <toc-element topic="Update_workspace.md"/>
             <toc-element topic="Delete_workspace.md"/>
         </toc-element>
-        <toc-element toc-title="Project">
+        <toc-element topic="Project.md">
             <toc-element topic="Get_all_projects_in_a_workspace.md"/>
             <toc-element topic="Create_a_project_in_a_workspace.md"/>
             <toc-element topic="Update_a_project_in_a_workspace.md"/>
             <toc-element topic="Delete_a_project_in_a_workspace.md"/>
         </toc-element>
-        <toc-element toc-title="Collection">
+        <toc-element topic="Collection.md">
             <toc-element topic="Get_all_collections_in_a_project.md"/>
             <toc-element topic="Get_a_collection_in_a_project.md"/>
             <toc-element topic="Create_a_collection_in_a_project.md"/>
@@ -30,7 +30,7 @@
             <toc-element topic="Commit_entries_into_collection.md"/>
         </toc-element>
 
-        <toc-element toc-title="Personal access tokens">
+        <toc-element topic="Personal-access-tokens.md">
             <toc-element topic="Get_all_personal_access_tokens.md"/>
             <toc-element topic="Create_a_new_personal_access_token.md"/>
             <toc-element topic="Delete_a_personal_access_token.md"/>
