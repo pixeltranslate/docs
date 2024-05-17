@@ -6,4 +6,90 @@
         <accepts>page.html</accepts>
     </rule>
     -->
+    <rule id="615fd88c">
+        <description>Created after removal of "Workspace" from Pixeltranslate Documentation</description>
+        <accepts>Workspace.html</accepts>
+    </rule>
+    <rule id="4e7718be">
+        <description>Created after removal of "Get workspaces by token" from Pixeltranslate Documentation</description>
+        <accepts>Get_workspaces_by_token.html</accepts>
+    </rule>
+    <rule id="edec0ad">
+        <description>Created after removal of "Get workspace by id" from Pixeltranslate Documentation</description>
+        <accepts>Get_workspace_by_id.html</accepts>
+    </rule>
+    <rule id="6f8cbce0">
+        <description>Created after removal of "Create workspace" from Pixeltranslate Documentation</description>
+        <accepts>Create_workspace.html</accepts>
+    </rule>
+    <rule id="4fb0a6bc">
+        <description>Created after removal of "Update workspace" from Pixeltranslate Documentation</description>
+        <accepts>Update_workspace.html</accepts>
+    </rule>
+    <rule id="68726db2">
+        <description>Created after removal of "Delete workspace" from Pixeltranslate Documentation</description>
+        <accepts>Delete_workspace.html</accepts>
+    </rule>
+    <rule id="4de6bc67">
+        <description>Created after removal of "Project" from Pixeltranslate Documentation</description>
+        <accepts>Project.html</accepts>
+    </rule>
+    <rule id="5f5b8acd">
+        <description>Created after removal of "Get all projects in a workspace" from Pixeltranslate Documentation
+        </description>
+        <accepts>Get_all_projects_in_a_workspace.html</accepts>
+    </rule>
+    <rule id="6dacbafc">
+        <description>Created after removal of "Create a project in a workspace" from Pixeltranslate Documentation
+        </description>
+        <accepts>Create_a_project_in_a_workspace.html</accepts>
+    </rule>
+    <rule id="55475c11">
+        <description>Created after removal of "Update a project in a workspace" from Pixeltranslate Documentation
+        </description>
+        <accepts>Update_a_project_in_a_workspace.html</accepts>
+    </rule>
+    <rule id="7052ded8">
+        <description>Created after removal of "Delete a project in a workspace" from Pixeltranslate Documentation
+        </description>
+        <accepts>Delete_a_project_in_a_workspace.html</accepts>
+    </rule>
+    <rule id="7da98246">
+        <description>Created after removal of "Collection" from Pixeltranslate Documentation</description>
+        <accepts>Collection.html</accepts>
+    </rule>
+    <rule id="651875a3">
+        <description>Created after removal of "Get all collections in a project" from Pixeltranslate Documentation
+        </description>
+        <accepts>Get_all_collections_in_a_project.html</accepts>
+    </rule>
+    <rule id="204e7905">
+        <description>Created after removal of "Get a collection in a project" from Pixeltranslate Documentation
+        </description>
+        <accepts>Get_a_collection_in_a_project.html</accepts>
+    </rule>
+    <rule id="2e209631">
+        <description>Created after removal of "Create a collection in a project" from Pixeltranslate Documentation
+        </description>
+        <accepts>Create_a_collection_in_a_project.html</accepts>
+    </rule>
+    <rule id="3ccf2e6f">
+        <description>Created after removal of "Update a collection in a project" from Pixeltranslate Documentation
+        </description>
+        <accepts>Update_a_collection_in_a_project.html</accepts>
+    </rule>
+    <rule id="18ef9d9c">
+        <description>Created after removal of "Delete a collection in a project" from Pixeltranslate Documentation
+        </description>
+        <accepts>Delete_a_collection_in_a_project.html</accepts>
+    </rule>
+    <rule id="5edbe57e">
+        <description>Created after removal of "Commit entries into collection" from Pixeltranslate Documentation
+        </description>
+        <accepts>Commit_entries_into_collection.html</accepts>
+    </rule>
+    <rule id="7a1f1a80">
+        <description>Created after removal of "API Reference" from Pixeltranslate Documentation</description>
+        <accepts>API_Reference.html</accepts>
+    </rule>
 </rules>

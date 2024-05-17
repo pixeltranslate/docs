@@ -4,6 +4,78 @@ info:
   title: backend API
   version: 0.1.0
 paths:
+  /tokens:
+    get:
+      tags:
+      - Personal Access Token Resource
+      summary: Get all personal access tokens
+      description: Get all personal access tokens
+      operationId: getAllTokens
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PersonalAccessToken"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
+    post:
+      tags:
+      - Personal Access Token Resource
+      summary: Create a new personal access token
+      description: Create a new personal access token
+      operationId: createToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PersonalAccessTokenCreateRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalAccessTokenCreateResponse"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
+  /tokens/{id}:
+    delete:
+      tags:
+      - Personal Access Token Resource
+      summary: Delete a personal access token
+      description: Delete a personal access token by id
+      operationId: deleteToken
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PersonalAccessToken"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
   /workspaces:
     get:
       tags:
@@ -147,6 +219,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/ProjectMinimalCollectionsDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Project Resource
@@ -165,6 +243,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Project"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     parameters:
     - name: workspaceId
       in: path
@@ -191,6 +275,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProjectMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     patch:
       tags:
       - Project Resource
@@ -215,6 +305,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ProjectMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     parameters:
     - name: workspaceId
       in: path
@@ -237,6 +333,12 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/CollectionMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     post:
       tags:
       - Collection Resource
@@ -255,6 +357,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Collection"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     parameters:
     - name: projectId
       in: path
@@ -286,6 +394,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Collection"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     delete:
       tags:
       - Collection Resource
@@ -305,6 +419,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CollectionMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     patch:
       tags:
       - Collection Resource
@@ -329,6 +449,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/CollectionMinimalDto"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     parameters:
     - name: projectId
       in: path
@@ -361,6 +487,12 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Collection"
+        "403":
+          description: Not Allowed
+        "401":
+          description: Not Authorized
+      security:
+      - SecurityScheme: []
     parameters:
     - name: collectionId
       in: path
@@ -449,6 +581,54 @@ components:
         name:
           pattern: \S
           type: string
+    PersonalAccessToken:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        userId:
+          $ref: "#/components/schemas/UUID"
+        createdAt:
+          format: int64
+          type: integer
+        expireAt:
+          format: int64
+          type: integer
+        roles:
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+    PersonalAccessTokenCreateRequest:
+      required:
+      - name
+      - expiration
+      type: object
+      properties:
+        name:
+          pattern: \S
+          type: string
+        expiration:
+          $ref: "#/components/schemas/PersonalAccessTokenExpiration"
+    PersonalAccessTokenCreateResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        token:
+          $ref: "#/components/schemas/PersonalAccessToken"
+    PersonalAccessTokenExpiration:
+      enum:
+      - NEVER
+      - ONE_HOUR
+      - ONE_DAY
+      - SEVEN_DAYS
+      - THIRTY_DAYS
+      - SIXTY_DAYS
+      - NINETY_DAYS
+      type: string
     Project:
       type: object
       properties:
