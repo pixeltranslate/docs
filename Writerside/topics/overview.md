@@ -2,13 +2,19 @@
 
 #### Staging API URL
 ```http
-https://staging-api.pixeltranslate.com/
+https://staging-api-v2.pixeltranslate.com/
 ```
 
 #### Authorization
 
-Http header authorization:
+User token authorization:
 
 ```http
 Authorization: Bearer (token)
+```
+
+Personal access token authorization:
+
+```http
+Authorization: PAT (token)
 ```
