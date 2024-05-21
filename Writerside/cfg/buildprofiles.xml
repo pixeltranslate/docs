@@ -4,6 +4,7 @@
 
     <variables>
         <custom-favicons>favicon.ico</custom-favicons>
+        <header-logo>logo.png</header-logo>
     </variables>
     <build-profile instance="y">
         <variables>
